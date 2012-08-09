@@ -42,14 +42,14 @@ class Youtubedj {
 	}
 
 	function _load() {
-		$this->objets['Deck']   = new Youtubedj_Deck;
-		$this->objets['Mixer']  = new Youtubedj_Mixer;
-		$this->objets['Que']    = new Youtubedj_Que;
-		$this->objets['Search'] = new Youtubedj_Search;
+		$this->objects['Deck']   = new Youtubedj_Deck;
+		$this->objects['Mixer']  = new Youtubedj_Mixer;
+		$this->objects['Que']    = new Youtubedj_Que;
+		$this->objects['Search'] = new Youtubedj_Search;
 	}
 
 	public function get( $object ) {
-		if( $this->objects[ $object ] ) {
+		if( isset( $this->objects[ $object ] ) ) {
 			return $this->objects[ $object ];
 		}
 
