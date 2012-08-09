@@ -7,7 +7,6 @@
 }
 
 .gear {
-	/* position: absolute; */
 	width: 300px;
 	float: left;
 	margin: 0 0 20px 0;
@@ -24,7 +23,6 @@
 	background: #eee;
 	font-size: 1em;
 	padding: 3px 5px;
-	float: left;
 	font-weight: bold;
 	display: inline;
 	text-transform: uppercase;
