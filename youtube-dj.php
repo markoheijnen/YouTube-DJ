@@ -25,7 +25,7 @@ License: GPL2
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-include 'inc/desk.php';
+include 'inc/deck.php';
 include 'inc/mixer.php';
 include 'inc/que.php';
 include 'inc/search.php';
@@ -42,7 +42,7 @@ class Youtubedj {
 	}
 
 	function _load() {
-		$this->objets['Deck']   = new Youtubedj_Desk;
+		$this->objets['Deck']   = new Youtubedj_Deck;
 		$this->objets['Mixer']  = new Youtubedj_Mixer;
 		$this->objets['Que']    = new Youtubedj_Que;
 		$this->objets['Search'] = new Youtubedj_Search;
