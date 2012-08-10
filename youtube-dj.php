@@ -27,7 +27,7 @@ License: GPL2
 
 include 'inc/deck.php';
 include 'inc/mixer.php';
-include 'inc/que.php';
+include 'inc/queue.php';
 include 'inc/search.php';
 
 class Youtubedj {
@@ -44,7 +44,7 @@ class Youtubedj {
 	function _load() {
 		$this->objects['Deck']   = new Youtubedj_Deck;
 		$this->objects['Mixer']  = new Youtubedj_Mixer;
-		$this->objects['Que']    = new Youtubedj_Que;
+		$this->objects['Queue']  = new Youtubedj_Queue;
 		$this->objects['Search'] = new Youtubedj_Search;
 	}
 
@@ -78,7 +78,7 @@ class Youtubedj {
 		$html .= '<div class="rack">';
 		$html .= $this->get( 'Mixer' )->html( 'Mixer', 'deck1', 'deck2' );
 		$html .= $this->get( 'Search' )->html( 'Search', array( 'deck1', 'deck2' ) );
-		$html .= $this->get( 'Mixer' )->html( 'Mixer', 'deck1', 'deck2' );
+		$html .= $this->get( 'Queue' )->html( 'Mixer' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack">';

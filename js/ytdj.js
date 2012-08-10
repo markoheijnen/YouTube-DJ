@@ -1,3 +1,7 @@
+/**
+ * Fix needToConfirm to check all players
+ */
+
 var tag = document.createElement('script');
 tag.src = "http://www.youtube.com/player_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -11,14 +15,44 @@ function onYouTubePlayerAPIReady() {
 
 	$.fn.deck = function() {
 		return this.each(function() {
-			var _this = $(this);
-			player    = _this.find('.player');
-			var id    = player.attr('id');
-			var code  = player.attr('movie');
+			var _this  = $(this);
+			var player = null;
+			var id     = _this.find('.player').attr('id');
+			var code   = _this.find('.player').attr('movie');
 
 			if( code.length > 0 ) {
-				load_movie( id, code );
+				player = load_movie( id, code );
 			}
+
+			$( '.play', _this ).click(function() {
+				if( player ) {
+					player.playVideo();
+					needToConfirm = true;
+				}
+			});
+
+			$( '.pause', _this ).click(function() {
+				if( player ) {
+					player.pauseVideo();
+				}
+			});
+
+			$( '.stop', _this ).click(function() {
+				if( player ) {
+					player.stopVideo();
+					needToConfirm = false;
+				}
+			});
+
+			$( '.gain', _this ).slider({ 
+				orientation: "vertical",
+				min: 0,
+				max: 100,
+				value: 100,
+				slide: function(event, ui) {
+					player.setVolume(ui.value);
+				}
+			});
 		});
 
 		function load_movie( id, code ) {
@@ -27,13 +61,23 @@ function onYouTubePlayerAPIReady() {
 				width: '300',
 				videoId: code
 			});
+
+			return player;
 		};
 	}
 
 })( jQuery );
 
 
+//onError
+needToConfirm = false;
+window.onbeforeunload = askConfirm;
 
+function askConfirm(){
+	if (needToConfirm){
+		return "ARE YOU SURE!?";
+	}    
+}
 
 
 
@@ -47,25 +91,6 @@ var params = { allowScriptAccess: "always" };
 			ytplayers[deckId].cueVideoById(videoId, startSeconds, suggestedQuality);
 		}
 		
-		function deckPlay(deckId) {
-		  if (ytplayers[deckId]) {
-			ytplayers[deckId].playVideo();
-			 var needToConfirm = true;
-		  }
-		}
-				
-		function deckPause(deckId) {
-		  if (ytplayers[deckId]) {
-			ytplayers[deckId].pauseVideo();
-		  }
-		}
-		
-		function deckStop(deckId) {
-		  if (ytplayers[deckId]) {
-			ytplayers[deckId].stopVideo();
-		  }
-		}
-		
 		function crossFade(deckId1, deckId2, fadeLoc) {
 			var volDeck1 = jQuery('#deck0 .gain').slider('option', 'value');
 			var volDeck2 = jQuery('#deck1 .gain').slider('option', 'value');
@@ -73,16 +98,7 @@ var params = { allowScriptAccess: "always" };
 			ytplayers[deckId2].setVolume(fadeLoc * ( volDeck2 / 100 ) );
 		}
 		
-		//onError
-			
-		needToConfirm = false;
-		window.onbeforeunload = askConfirm;
-		
-		function askConfirm(){
-			if (needToConfirm){
-				return "ARE YOU SURE!?";
-			}    
-		}
+
 				
 		function getUrlVars()
 		{
@@ -113,32 +129,7 @@ var params = { allowScriptAccess: "always" };
 					crossFade(0, 1, ui.value);
 				}
 			});
-				
-			$("#deck0 .gain").slider({ 
-				orientation: "vertical",
-				//range: "min",
-				min: 0,
-				max: 100,
-				value: 100,
-				slide: function(event, ui) {
-					//$("#amount").val(ui.value);
-					ytplayers[0].setVolume(ui.value);
-				}
-			});
-				
-			$("#deck1 .gain").slider({ 
-				orientation: "vertical",
-				//range: "min",
-				min: 0,
-				max: 100,
-				value: 100,
-				slide: function(event, ui) {
-					//$("#amount").val(ui.value);
-					ytplayers[1].setVolume(ui.value);
-				}
-			});
 
-			
 			$('#cfToA').click(function () {
 				$('#crossfader').slider('option', 'value', 0);
 				crossFade(0, 1, 0);

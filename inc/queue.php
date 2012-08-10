@@ -1,11 +1,11 @@
 <?php
 
-class Youtubedj_Que {
+class Youtubedj_Queue {
 	function __construct() {
 		
 	}
 
-	function html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
+	function html( $title ) {
 		$html  = '<div class="que gear">';
 		$html .= '<h2>' . $title . '</h2>';
 
