@@ -10,6 +10,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 function onYouTubePlayerAPIReady() {
 	jQuery('.deck').deck();
 	jQuery('.mixer').mixer();
+	jQuery('.search').search();
 }
 
 (function( $ ){
@@ -62,6 +63,9 @@ function onYouTubePlayerAPIReady() {
 			player = new YT.Player( id, {
 				height: '250',
 				width: '300',
+				playerVars: {
+					//controls: 0
+				},
 				videoId: code
 			});
 
@@ -134,6 +138,49 @@ function onYouTubePlayerAPIReady() {
 				$.data( document.body, deck1.find('.player').attr('id') ).setVolume( ( 100 - fadeLoc ) * ( volDeck1 / 100 ) );
 				$.data( document.body, deck2.find('.player').attr('id') ).setVolume( fadeLoc * ( volDeck2 / 100 ) );
 			}
+		}
+	}
+
+	$.fn.search = function() {
+		return this.each(function() {
+			var _this = $(this);
+
+			$( 'form', _this ).click(function( evt ) {
+				evt.preventDefault();
+				load_data( $( '.searchResults', _this ), $( '.searchTerm', _this ).val(), 1 );
+			});
+		});
+
+		function load_data( searchresult_box, key, offset ) {
+			var data = {
+				action: 'youtubedj_search',
+				searchTerm: key,
+				offset: offset
+			};
+
+			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+			$.post( youtubedj.ajax, data, function(response) {
+				searchresult_box.html( '' );
+
+				var html = '<ul class="videolist">';
+
+				$.each(response.songs, function(key, value) { 
+					html += '<li id="' + value.id + '" class="videoresult">';
+					html += '<img src="' + value.thumbnail.default + '" alt="' + value.title + '">';
+					html += '<h5>' + value.title + '</h5>';
+					html += '<div class="loadto">';
+					html += '<a title="How to give the perfect man hug" class="fav" href="#" mediaid="JUdWApwbudQ">Fav</a>';
+					html += '<a class="queue">Add to queue</a>';
+					html += '<a class="load loadTo0" href="#" mediaid="JUdWApwbudQ">Deck 1</a>';
+					html += '<a class="load loadTo1" href="#" mediaid="JUdWApwbudQ">Deck 2</a>';
+					html += '</div>';
+					html += '</li>';
+				});
+
+				html += '</ul>';
+
+				searchresult_box.html( html );
+			});
 		}
 	}
 

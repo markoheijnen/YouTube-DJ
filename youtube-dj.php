@@ -65,6 +65,7 @@ class Youtubedj {
 
 	public function default_player( $atts = '' ) {
 		wp_enqueue_script('youtubedj');
+		wp_localize_script( 'youtubedj', 'youtubedj', array( 'ajax' => admin_url( 'admin-ajax.php' ) ) );
 
 		wp_enqueue_style('youtubedj');
 		wp_enqueue_style('youtubedj-jqui');
