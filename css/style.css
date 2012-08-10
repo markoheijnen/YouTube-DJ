@@ -24,7 +24,7 @@
 	font-size: 1em;
 	padding: 3px 5px;
 	font-weight: bold;
-	display: inline;
+	display: inline-block;
 	text-transform: uppercase;
 	cursor: pointer;
 }
@@ -113,7 +113,7 @@
 	text-transform: uppercase;
 }
 
-#mixer .faders {
+.mixer .faders {
 	width: 290px;
 	padding: 5px;
 	background: #627AAD;
@@ -122,24 +122,24 @@
 	color: #fff;
 }
 
-#mixer .btns {
+.mixer .btns {
 	float: left;
 }
 
-#mixer #crossfader {
+.mixer .crossfader {
 	width: 228px;
 	float: left;
 	margin: 5px 10px;
 }
 
-#mixer a.cfBtn {
+.mixer a.mixer-button {
 	float: left;
 	padding: 3px 5px;
 	background: #eee;
 	color: #627AAD;
 }
 
-#mixer a#cfToB.cfBtn {
+.mixer a.mixer-button-b {
 	float: right;
 }
 
