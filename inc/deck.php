@@ -5,7 +5,7 @@ class Youtubedj_Deck {
 		
 	}
 
-	function html( $id, $title, $movie_code = 'H6M5npJ83uI' ) {
+	function html( $id, $title, $movie_code = '' ) {
 		$html  = '<div id="' . $id . '" class="deck gear">';
 		$html .= '<h2>' . $title . '</h2>';
 

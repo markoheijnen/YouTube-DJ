@@ -72,7 +72,7 @@ class Youtubedj {
 		$html  = '<div class="booth">';
 
 		$html .= '<div class="rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck1', 'Deck 1' );
+		$html .= $this->get( 'Deck' )->html( 'deck1', 'Deck 1', 'H6M5npJ83uI' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack">';
@@ -82,7 +82,7 @@ class Youtubedj {
 		$html .= '</div>';
 
 		$html .= '<div class="rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck2', 'Deck 2' );
+		$html .= $this->get( 'Deck' )->html( 'deck2', 'Deck 2', 'sOS9aOIXPEk' );
 		$html .= '</div>';
 
 		return $html;

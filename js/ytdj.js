@@ -78,36 +78,62 @@ function onYouTubePlayerAPIReady() {
 			var deck2 = $(this).attr('deck2');
 
 			if( deck1.length > 0 && deck2.length > 0 ) {
-				$( '.crossfader', _this ).slider({ 
+				var defaultvalue = 60;
+				var oldvalue = defaultvalue;
+
+				var slider = $( '.crossfader', _this ).slider({ 
 					min: 0,
 					max: 100,
-					value: 60,
+					value: defaultvalue,
+					animate: 500,
 					slide: function(event, ui) {
-						crossFade( deck1, deck2, ui.value );
+						crossFade( deck1, deck2, ui.value, oldvalue );
+						oldvalue = ui.value;
+					},
+					change: function(event, ui) {
+						oldvalue = ui.value;
 					}
 				});
 
 				$( '.mixer-button-a', _this ).click(function () {
-					$( '.crossfader', _this ).slider('option', 'value', 0);
-					crossFade( deck1, deck2, 0 );
+					crossFade( deck1, deck2, 0, oldvalue, true );
+					slider.slider('value', 0 );
 				});	
 				
-				$( 'mixer-button-b', _this ).click(function () {
-					$( '.crossfader', _this ).slider('option', 'value', 100);
-					crossFade( deck1, deck2, 100 );
+				$( '.mixer-button-b', _this ).click(function () {
+					crossFade( deck1, deck2, 100, oldvalue, true );
+					slider.slider('value', 100 );
 				});
 			}
 		});
 
-		function crossFade(deckId1, deckId2, fadeLoc) {
+		function crossFade(deckId1, deckId2, fadeLoc, fadeLocOld, animate ) {
+			animate = typeof animate !== 'undefined' ? animate : false;
+
 			var deck1 = $( '#' + deckId1 );
 			var deck2 = $( '#' + deckId2 );
 
 			var volDeck1 = jQuery( '.gain', deck1 ).slider('option', 'value');
 			var volDeck2 = jQuery( '.gain', deck2 ).slider('option', 'value');
 
-			$.data( document.body, deck1.find('.player').attr('id') ).setVolume( ( 100 - fadeLoc ) * ( volDeck1 / 100 ) );
-			$.data( document.body, deck2.find('.player').attr('id') ).setVolume( fadeLoc * ( volDeck2 / 100 ) );
+			if( animate ) {
+				jQuery({fadeLoc: fadeLocOld}).animate({fadeLoc: fadeLoc}, {
+					duration: 500,
+					easing: 'linear',
+					step: function() {
+						$.data( document.body, deck1.find('.player').attr('id') ).setVolume( ( 100 - Math.ceil( this.fadeLoc ) ) * ( volDeck1 / 100 ) );
+						$.data( document.body, deck2.find('.player').attr('id') ).setVolume( Math.ceil( this.fadeLoc ) * ( volDeck2 / 100 ) );
+					},
+					complete: function() {
+						$.data( document.body, deck1.find('.player').attr('id') ).setVolume( ( 100 - fadeLoc ) * ( volDeck1 / 100 ) );
+						$.data( document.body, deck2.find('.player').attr('id') ).setVolume( fadeLoc * ( volDeck2 / 100 ) );
+					}
+				});
+			}
+			else {
+				$.data( document.body, deck1.find('.player').attr('id') ).setVolume( ( 100 - fadeLoc ) * ( volDeck1 / 100 ) );
+				$.data( document.body, deck2.find('.player').attr('id') ).setVolume( fadeLoc * ( volDeck2 / 100 ) );
+			}
 		}
 	}
 
