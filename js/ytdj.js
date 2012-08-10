@@ -151,10 +151,6 @@ function askConfirm(){
 }
 
 
-
-var params = { allowScriptAccess: "always" };
-
-		
 function deckLoad(deckId, videoId) {
 	//alert(videoId + ' ' + deckId);
 	var startSeconds = 0;
@@ -173,7 +169,4 @@ function getUrlVars()
 		vars.push(hash[0]);
 		vars[hash[0]] = hash[1];
 	}
-	//alert (vars[1]);
 }
-
-//getUrlVars();
