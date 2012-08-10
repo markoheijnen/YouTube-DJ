@@ -1,20 +1,44 @@
+var tag = document.createElement('script');
+tag.src = "http://www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubePlayerAPIReady() {
+	jQuery('.deck').deck();
+}
+
+(function( $ ){
+
+	$.fn.deck = function() {
+		return this.each(function() {
+			var _this = $(this);
+			player    = _this.find('.player');
+			var id    = player.attr('id');
+			var code  = player.attr('movie');
+
+			if( code.length > 0 ) {
+				load_movie( id, code );
+			}
+		});
+
+		function load_movie( id, code ) {
+			player = new YT.Player( id, {
+				height: '250',
+				width: '300',
+				videoId: code
+			});
+		};
+	}
+
+})( jQuery );
+
+
+
+
+
+
 var params = { allowScriptAccess: "always" };
-		
-		var atts = { id: "player0" };
-		swfobject.embedSWF("http://www.youtube.com/v/vUGaZpUY4so?enablejsapi=1&playerapiid=ytplayer", 
-						   "player0", "300", "250", "8", null, null, params, atts);
-		
-		var atts = { id: "player1" };
-		swfobject.embedSWF("http://www.youtube.com/v/5NFoYvU8MnY?enablejsapi=1&playerapiid=ytplayer", 
-						   "player1", "300", "250", "8", null, null, params, atts);
-		
-		ytplayers = new Array();
-		
-		function onYouTubePlayerReady(playerId) {
-		  ytplayers[0] = document.getElementById("player0");
-		  ytplayers[1] = document.getElementById("player1");
-		 // alert(ytplayers);
-		}
+
 		
 		function deckLoad(deckId, videoId) {
 			//alert(videoId + ' ' + deckId);
@@ -43,8 +67,8 @@ var params = { allowScriptAccess: "always" };
 		}
 		
 		function crossFade(deckId1, deckId2, fadeLoc) {
-			var volDeck1 = $('#deck0 .gain').slider('option', 'value');
-			var volDeck2 = $('#deck1 .gain').slider('option', 'value');
+			var volDeck1 = jQuery('#deck0 .gain').slider('option', 'value');
+			var volDeck2 = jQuery('#deck1 .gain').slider('option', 'value');
 			ytplayers[deckId1].setVolume( ( 100 - fadeLoc ) * ( volDeck1 / 100 ) );
 			ytplayers[deckId2].setVolume(fadeLoc * ( volDeck2 / 100 ) );
 		}
@@ -76,7 +100,7 @@ var params = { allowScriptAccess: "always" };
 		//getUrlVars();
 			
 		// jQuery Shizzle
-		$(function() {
+		jQuery(function( $ ) {
 			
 			$("#crossfader").slider({ 
 				//orientation: "vertical",
@@ -113,14 +137,7 @@ var params = { allowScriptAccess: "always" };
 					ytplayers[1].setVolume(ui.value);
 				}
 			});
-			
-			$(".gear").draggable({ handle: "h2" });
-			/*
-			//$("#rack1, #rack2, #rack3").sortable({
-			$("#rack2").sortable({
-				connectWith: '.rack'
-			}).disableSelection();
-			*/
+
 			
 			$('#cfToA').click(function () {
 				$('#crossfader').slider('option', 'value', 0);
