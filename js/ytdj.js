@@ -34,7 +34,7 @@ function onYouTubePlayerAPIReady() {
 	"use strict";
 
 	$.fn.deck = function () {
-		function load_movie(id, code) {
+		function load_player(id, code) {
 			var player = new YT.Player(id, {
 				height: '250',
 				width: '300',
@@ -44,49 +44,50 @@ function onYouTubePlayerAPIReady() {
 				videoId: code
 			});
 
-			$.data(document.body, id, player);
-
 			return player;
 		}
 
 		return this.each(function () {
-			var deck   = $(this);
-			var player = null;
-			var id     = deck.find('.player').attr('id');
-			var code   = deck.find('.player').attr('movie');
+			var deck       = this;
+			this.deck      = $(this);
+			this.player    = null;
+			this.player_id = this.deck.find('.player').attr('id');
+			this.code      = this.deck.find('.player').attr('movie');
 
-			if (code.length > 0) {
-				player = load_movie(id, code);
+			$.data(document.body, this.deck.attr('id'), this);
+
+			if (this.code.length > 0) {
+				this.player = load_player(this.player_id, this.code);
 			}
 
-			$('.play', deck).click(function () {
-				if (player) {
-					player.playVideo();
+			$('.play', this.deck).click(function () {
+				if (deck.player) {
+					deck.player.playVideo();
 					needToConfirm = true;
 				}
 			});
 
-			$('.pause', deck).click(function () {
-				if (player) {
-					player.pauseVideo();
+			$('.pause', this.deck).click(function () {
+				if (deck.player) {
+					deck.player.pauseVideo();
 				}
 			});
 
-			$('.stop', deck).click(function () {
-				if (player) {
-					player.stopVideo();
+			$('.stop', this.deck).click(function () {
+				if (deck.player) {
+					deck.player.stopVideo();
 					needToConfirm = false;
 				}
 			});
 
-			$('.gain', deck).slider({
+			$('.gain', this.deck).slider({
 				orientation: "vertical",
 				min: 0,
 				max: 100,
 				value: 100,
 				slide: function (event, ui) {
-					if (player) {
-						player.setVolume(ui.value);
+					if (deck.player) {
+						deck.player.setVolume(ui.value);
 					}
 				}
 			});
@@ -97,28 +98,28 @@ function onYouTubePlayerAPIReady() {
 		function crossFade(deckId1, deckId2, fadeLoc, fadeLocOld, animate) {
 			animate = animate === 'undefined' ? false : animate;
 
-			var deck1 = $('#' + deckId1);
-			var deck2 = $('#' + deckId2);
+			var deck1 = $.data(document.body, deckId1 );
+			var deck2 = $.data(document.body, deckId2 );
 
-			var volDeck1 = jQuery('.gain', deck1).slider('option', 'value');
-			var volDeck2 = jQuery('.gain', deck2).slider('option', 'value');
+			var volDeck1 = jQuery('#' + deckId1 + ' .gain').slider('option', 'value');
+			var volDeck2 = jQuery('#' + deckId2 + ' .gain').slider('option', 'value');
 
 			if (animate) {
 				jQuery({fadeLoc: fadeLocOld}).animate({fadeLoc: fadeLoc}, {
 					duration: 500,
 					easing: 'linear',
 					step: function () {
-						$.data(document.body, deck1.find('.player').attr('id')).setVolume((100 - Math.ceil(this.fadeLoc)) * (volDeck1 / 100));
-						$.data(document.body, deck2.find('.player').attr('id')).setVolume(Math.ceil(this.fadeLoc) * (volDeck2 / 100));
+						deck1.player().setVolume((100 - Math.ceil(this.fadeLoc)) * (volDeck1 / 100));
+						deck2.player().setVolume(Math.ceil(this.fadeLoc) * (volDeck2 / 100));
 					},
 					complete: function () {
-						$.data(document.body, deck1.find('.player').attr('id')).setVolume((100 - fadeLoc) * (volDeck1 / 100));
-						$.data(document.body, deck2.find('.player').attr('id')).setVolume(fadeLoc * (volDeck2 / 100));
+						deck1.player().setVolume((100 - fadeLoc) * (volDeck1 / 100));
+						deck2.player().setVolume(fadeLoc * (volDeck2 / 100));
 					}
 				});
 			} else {
-				$.data(document.body, deck1.find('.player').attr('id')).setVolume((100 - fadeLoc) * (volDeck1 / 100));
-				$.data(document.body, deck2.find('.player').attr('id')).setVolume(fadeLoc * (volDeck2 / 100));
+				deck1.player.setVolume((100 - fadeLoc) * (volDeck1 / 100));
+				deck2.player.setVolume(fadeLoc * (volDeck2 / 100));
 			}
 		}
 
@@ -174,8 +175,9 @@ function onYouTubePlayerAPIReady() {
 
 				var html_decks = '';
 				$.each(decks, function (key, value) {
-						html_decks += '<a class="load" deck="'+ value +'">' + value + '</a>';
-					});
+					var title = $('#' + value).find('h2').html()
+					html_decks += '<a class="loadsong" deck="'+ value +'">' + title + '</a>';
+				});
 
 				var html = '<ul class="videolist">';
 
@@ -207,6 +209,13 @@ function onYouTubePlayerAPIReady() {
 				if (searchTerm.length > 0) {
 					load_data($('.searchResults', search), search.attr('decks'), searchTerm, 1);
 				}
+			});
+
+			$(document).on("click", '.loadsong', search, function (evt) {
+				evt.preventDefault();
+
+				var deck = $.data(document.body, $(this).attr('deck') );
+				deck.player.cueVideoById($(this).closest('.song').attr('id'), 0, 'small');
 			});
 		});
 	};
