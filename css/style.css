@@ -14,10 +14,6 @@
 	padding: 0;
 }
 
-.gear label {
-	cursor: pointer;
-}
-
 .gear h2 {
 	margin: 0 0 4px 0;
 	background: #eee;
@@ -79,18 +75,19 @@
 	background: #c00;
 }
 
-.videoresult {
+
+.result {
 	width: 300px;
 	float: left;
 	padding: 4px 0;
 	border-bottom: solid 1px #eee;
 }
 
-.videoresult h5 {
+.result h5 {
 	margin: 2px 0 4px 0;
 }
 
-.videoresult a {
+.result a {
 	padding: 3px 5px;
 	background: #3B5998;
 	color: #fff;
@@ -99,19 +96,27 @@
 	text-decoration: none;
 }	
 
-.videoresult a:hover {
+.result a:hover {
 	background: #627AAD;
 }
 
-.videoresult img {
+.result a.fav {
+	background: #e7bf38;
+}
+.result a.fav:hover {
+	background: #f79f18;
+}
+
+.result img {
 	width: 40px;
 	height: 30px;
 	display: none;
 }
-.videoresult .loadto {
+.result .loadto {
 	float: right;
 	text-transform: uppercase;
 }
+
 
 .mixer .faders {
 	width: 290px;

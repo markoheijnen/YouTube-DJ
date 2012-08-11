@@ -6,17 +6,19 @@ class Youtubedj_Search {
 		add_action( 'wp_ajax_nopriv_youtubedj_search', array( &$this, 'my_action_callback' ) );
 	}
 
-	function html( $title, $decks ) {
-		$html  = '<div class="search gear">';
+	function html( $title, $decks, $value = '' ) {
+		$html  = '<div class="search gear" decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
 		$html .= '<form action="" method="post">';
-		$html .= '<input name="searchTerm" class="searchTerm" type="text" value="Your song" />';
+		$html .= '<input name="searchTerm" class="searchTerm" type="text" value="' . $value . '" placeholder="Your song" />';
 		$html .= '<input type="submit" value="Search" />';
 		$html .= '</form>';
 
 		$html .= '<div class="searchResults"></div>';
-		$html .= '<div class="searchResultsNavigation">';
+		$html .= '<div class="searchResultsNavigation" style="display:none">';
+		$html .= '<a class="SearchResultsBack">Back</a>';
+		$html .= '<a class="SearchResultsNext">Next</a>';
 		$html .= '</div>';
 
 		$html .= '</div>';
@@ -28,7 +30,7 @@ class Youtubedj_Search {
 		header('Content-type: application/json');
 
 		$search      = esc_attr( $_REQUEST['searchTerm'] );
-		$max_results = 10;
+		$max_results = 5;
 		$start_index = absint( $_REQUEST['offset'] );
 
 		//format=5 = embed only and format=1,6 is mobile only
@@ -48,9 +50,9 @@ class Youtubedj_Search {
 				array_push( $response['songs'], array(
 					'id'        => $item->id,
 					'title'     => $item->title,
-					'thumbnail' => $item->thumbnail,
+					'thumbnail' => array( 'normal' => $item->thumbnail->sqDefault, 'high' => $item->thumbnail->hqDefault ),
 					'duration'  => $this->duration,
-					'mobile'    => true
+					'mobile'    => isset( $this->player->mobile )
 				) );
 			}
 		}
