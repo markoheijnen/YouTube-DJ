@@ -5,13 +5,12 @@ class Youtubedj_Queue {
 		
 	}
 
-	function html( $title ) {
-		$html  = '<div class="que gear">';
+	function html( $id, $title ) {
+		$html  = '<div id="' . $id . '" class="queue gear">';
 		$html .= '<h2>' . $title . '</h2>';
 
-		$html .= '<div class="queue">';
-		$html .= '<ul class="videolist"></ul>';
-		$html .= '</div>';
+		$html .= '<ul class="queuelist">';
+		$html .= '</ul>';
 
 		$html .= '</div>';
 

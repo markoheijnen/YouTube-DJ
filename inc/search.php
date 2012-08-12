@@ -6,8 +6,8 @@ class Youtubedj_Search {
 		add_action( 'wp_ajax_nopriv_youtubedj_search', array( &$this, 'my_action_callback' ) );
 	}
 
-	function html( $title, $decks, $value = '' ) {
-		$html  = '<div class="search gear" decks="' . implode( ',', $decks ) . '">';
+	function html( $title, $queue, $decks, $value = '' ) {
+		$html  = '<div class="search gear" queue="' . $queue . '" decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
 		$html .= '<form action="" method="post">';
