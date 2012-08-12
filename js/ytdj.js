@@ -27,12 +27,12 @@ function youtubedj_set(id, object) {
 }
 
 function in_array(array, id) {
-    for(var i=0;i<array.length;i++) {
-        if(array[i] === id) {
-            return true;
-        }
-    }
-    return false;
+	for(var i=0;i<array.length;i++) {
+		if(array[i] === id) {
+			return true;
+		}
+	}
+	return false;
 }
 
 var tag = document.createElement('script');
@@ -204,16 +204,17 @@ function onYouTubePlayerAPIReady() {
 				});
 
 				var html = '<ul class="videolist">';
-
-				$.each(response.songs, function (key, value) {
-					html += '<li id="' + value.id + '" class="result song">';
-					html += '<img src="' + value.thumbnail.normal + '" alt="' + value.title + '">';
-					html += '<h5>' + value.title + '</h5>';
-					html += '<div class="loadto">';
-					html += buttons;
-					html += '</div>';
-					html += '</li>';
-				});
+				if (response) {
+					$.each(response.songs, function (key, value) {
+						html += '<li id="' + value.id + '" class="result song">';
+						html += '<img src="' + value.thumbnail.normal + '" alt="' + value.title + '">';
+						html += '<h5>' + value.title + '</h5>';
+						html += '<div class="loadto">';
+						html += buttons;
+						html += '</div>';
+						html += '</li>';
+					});
+				}
 
 				html += '</ul>';
 
