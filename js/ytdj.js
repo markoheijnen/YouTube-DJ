@@ -127,12 +127,12 @@ function onYouTubePlayerAPIReady() {
 					duration: 500,
 					easing: 'linear',
 					step: function () {
-						deck1.player().setVolume((100 - Math.ceil(this.fadeLoc)) * (volDeck1 / 100));
-						deck2.player().setVolume(Math.ceil(this.fadeLoc) * (volDeck2 / 100));
+						deck1.player.setVolume((100 - Math.ceil(this.fadeLoc)) * (volDeck1 / 100));
+						deck2.player.setVolume(Math.ceil(this.fadeLoc) * (volDeck2 / 100));
 					},
 					complete: function () {
-						deck1.player().setVolume((100 - fadeLoc) * (volDeck1 / 100));
-						deck2.player().setVolume(fadeLoc * (volDeck2 / 100));
+						deck1.player.setVolume((100 - fadeLoc) * (volDeck1 / 100));
+						deck2.player.setVolume(fadeLoc * (volDeck2 / 100));
 					}
 				});
 			} else {
