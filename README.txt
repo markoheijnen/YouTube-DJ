@@ -31,5 +31,9 @@ If you got any idea please create a new topic in the support forum.
 
 == Changelog ==
 
+= 0.2 =
+* Fixes queue
+* Update styling a bit
+
 = 0.1 =
 * Initial release
