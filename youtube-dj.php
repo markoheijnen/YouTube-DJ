@@ -73,17 +73,17 @@ class Youtubedj {
 		$html  = '<div class="booth">';
 
 		$html .= '<div class="rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck1', 'Deck 1', 'H6M5npJ83uI' );
+		$html .= $this->get( 'Deck' )->html( 'deck1', 'Deck 1', 'H6M5npJ83uI', 'queue' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack">';
 		$html .= $this->get( 'Mixer' )->html( 'Mixer', 'deck1', 'deck2' );
 		$html .= $this->get( 'Search' )->html( 'Search', 'queue', array( 'deck1', 'deck2' ) );
-		$html .= $this->get( 'Queue' )->html( 'queue', 'Queue' );
+		$html .= $this->get( 'Queue' )->html( 'queue', 'Queue', array( 'deck1', 'deck2' ) );
 		$html .= '</div>';
 
 		$html .= '<div class="rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck2', 'Deck 2', 'sOS9aOIXPEk' );
+		$html .= $this->get( 'Deck' )->html( 'deck2', 'Deck 2', 'sOS9aOIXPEk', 'queue' );
 		$html .= '</div>';
 
 		return $html;
