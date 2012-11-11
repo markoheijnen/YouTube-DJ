@@ -53,7 +53,7 @@ function onStateChange( newState ) {
 	}
 	else if( newState.data == YT.PlayerState.ENDED ) {
 		var queue = youtubedj_get( newState.target.a.getAttribute('queue') );
-		queue.play_next( newState.target.a.getAttribute('id') );
+		queue.play_next( newState.target.a.parentNode.getAttribute('id') );
 	}
 }
 
@@ -296,9 +296,10 @@ function onPlayerReady(event) {
 
 			this.play_next = function (deck) {
 				if( songs[0] ) {
-					var song_id = songs[0];
+					var currentdeck = youtubedj_get( deck );
+					currentdeck.player.cueVideoById( songs[0], 0, 'small');
 
-					list.find('li[songid="' + song_id + '"]' ).hide( 1000, function() {
+					list.find('li[songid="' + songs[0] + '"]' ).hide( 1000, function() {
 						$(this).remove();
 					});
 
@@ -310,7 +311,7 @@ function onPlayerReady(event) {
 						_decks.splice(deck_index, 1);
 
 					deck = youtubedj_get( _decks[0] );
-					deck.player.loadVideoById( song_id, 0, 'small');
+					deck.player.playVideo();
 				}
 			}
 		});
