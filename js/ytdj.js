@@ -57,6 +57,11 @@ function onStateChange( newState ) {
 	}
 }
 
+function onPlayerReady(event) {
+	event.target.playVideo();
+	event.target.pauseVideo();
+}
+
 (function ($) {
 	"use strict";
 
@@ -85,6 +90,7 @@ function onStateChange( newState ) {
 
 			if (this.code.length > 0) {
 				this.player = load_player(this.player_id, this.code);
+				this.player.addEventListener("onReady", "onPlayerReady");
 				this.player.addEventListener("onStateChange", "onStateChange");
 			}
 
