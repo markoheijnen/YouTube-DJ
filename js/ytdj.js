@@ -69,7 +69,7 @@ function onPlayerReady(event) {
 		function load_player(id, code) {
 			var player = new YT.Player(id, {
 				height: '250',
-				width: '300',
+				width: '320',
 				playerVars: {
 					//controls: 0
 				},
