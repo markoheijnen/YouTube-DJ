@@ -11,6 +11,10 @@
 	margin: 0 0 0 10px;
 }
 
+.rack-rights .deck {
+	text-align: right;
+}
+
 .rack-center {
 	float: none;
 	margin: 0px auto;
