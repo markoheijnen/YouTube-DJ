@@ -2,12 +2,13 @@
 	width: 320px;
 	padding: 0 0 30px 0;
 	float: left;
-	margin: 0 20px 0 0;
+	margin: 0 10px 0 0;
 	/* border: solid 1px red; */
 }
 
 .rack-right {
 	float: right;
+	margin: 0 0 0 10px;
 }
 
 .rack-center {
