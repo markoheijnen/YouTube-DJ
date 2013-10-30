@@ -33,7 +33,7 @@ include 'inc/queue.php';
 include 'inc/search.php';
 
 class Youtubedj {
-	private $version = '0.2';
+	private $version = '0.3-dev';
 	private $objects = array();
 
 	function __construct() {
