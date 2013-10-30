@@ -20,9 +20,9 @@ class Youtubedj_Deck {
 		$html .= '></div>';
 
 		$html .= '<div class="btns">';
-		$html .= '<a class="play">Play</a>';
-		$html .= '<a class="pause">Pause</a>';
-		$html .= '<a class="stop">Stop</a>';
+		$html .= '<a class="play">' . __( 'Play', 'youtube-dj' ) . '</a>';
+		$html .= '<a class="pause">' . __( 'Pause', 'youtube-dj' ) . '</a>';
+		$html .= '<a class="stop">' . __( 'Stop', 'youtube-dj' ) . '</a>';
 		$html .= '</div>';
 	
 		$html .= '<div class="fader"><div class="gain"></div></div>';

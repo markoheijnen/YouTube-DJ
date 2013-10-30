@@ -73,17 +73,17 @@ class Youtubedj {
 		$html  = '<div class="booth">';
 
 		$html .= '<div class="rack-left rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck1', 'Deck 1', 'H6M5npJ83uI', 'queue' );
+		$html .= $this->get( 'Deck' )->html( 'deck1', __( 'Deck 1', 'youtube-dj' ), 'H6M5npJ83uI', 'queue' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack-right rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck2', 'Deck 2', 'sOS9aOIXPEk', 'queue' );
+		$html .= $this->get( 'Deck' )->html( 'deck2', __( 'Deck 2', 'youtube-dj' ), 'sOS9aOIXPEk', 'queue' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack-center rack">';
-		$html .= $this->get( 'Mixer' )->html( 'Mixer', 'deck1', 'deck2' );
-		$html .= $this->get( 'Search' )->html( 'Search', 'queue', array( 'deck1', 'deck2' ) );
-		$html .= $this->get( 'Queue' )->html( 'queue', 'Queue', array( 'deck1', 'deck2' ) );
+		$html .= $this->get( 'Mixer' )->html( __( 'Mixes', 'youtube-dj' ), 'deck1', 'deck2' );
+		$html .= $this->get( 'Search' )->html( _x( 'Search', 'Compontent title', 'youtube-dj' ), 'queue', array( 'deck1', 'deck2' ) );
+		$html .= $this->get( 'Queue' )->html( 'queue', __( 'Queue', 'youtube-dj' ), array( 'deck1', 'deck2' ) );
 		$html .= '</div>';
 
 		return $html;

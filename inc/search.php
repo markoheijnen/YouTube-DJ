@@ -11,14 +11,14 @@ class Youtubedj_Search {
 		$html .= '<h2>' . $title . '</h2>';
 
 		$html .= '<form action="" method="post">';
-		$html .= '<input name="searchTerm" class="searchTerm" type="text" value="' . $value . '" placeholder="Your song" />';
-		$html .= '<input type="submit" value="Search" />';
+		$html .= '<input name="searchTerm" class="searchTerm" type="text" value="' . $value . '" placeholder="' . __( 'Your song', 'youtube-dj' ) . '" />';
+		$html .= '<input type="submit" value="' . _x( 'Search', 'Search button', 'youtube-dj' ) . '" />';
 		$html .= '</form>';
 
 		$html .= '<div class="searchResults"></div>';
 		$html .= '<div class="searchResultsNavigation" style="display:none">';
-		$html .= '<a class="SearchResultsBack">Back</a>';
-		$html .= '<a class="SearchResultsNext">Next</a>';
+		$html .= '<a class="SearchResultsBack">' . __( 'Previous', 'youtube-dj' ) . '</a>';
+		$html .= '<a class="SearchResultsNext">' . __( 'Next', 'youtube-dj' ) . '</a>';
 		$html .= '</div>';
 
 		$html .= '</div>';
