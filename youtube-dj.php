@@ -7,7 +7,7 @@ Version:     0.3-dev
 Author:      Marko Heijnen
 Author URI:  http://markoheijnen.com
 License:     GPL2
-Text Domain: hello-world
+Text Domain: youtube-dj
 Domain Path: /languages
 */
 
