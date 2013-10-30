@@ -35,10 +35,10 @@ class Youtubedj {
 	private $objects = array();
 
 	function __construct() {
-		add_action( 'plugins_loaded', array( &$this, '_load' ) );
-		add_shortcode( 'youtubedj', array( &$this, 'default_player' ) );
+		add_action( 'plugins_loaded', array( $this, '_load' ) );
+		add_shortcode( 'youtubedj', array( $this, 'default_player' ) );
 
-		add_action( 'wp_enqueue_scripts', array( &$this, '_register_scripts' ), 1 );
+		add_action( 'wp_enqueue_scripts', array( $this, '_register_scripts' ), 1 );
 	}
 
 	function _load() {

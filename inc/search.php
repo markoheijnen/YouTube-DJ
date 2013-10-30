@@ -2,8 +2,8 @@
 
 class Youtubedj_Search {
 	function __construct() {
-		add_action( 'wp_ajax_youtubedj_search', array( &$this, 'search' ) );
-		add_action( 'wp_ajax_nopriv_youtubedj_search', array( &$this, 'search' ) );
+		add_action( 'wp_ajax_youtubedj_search', array( $this, 'search' ) );
+		add_action( 'wp_ajax_nopriv_youtubedj_search', array( $this, 'search' ) );
 	}
 
 	function html( $title, $queue, $decks, $value = '' ) {
