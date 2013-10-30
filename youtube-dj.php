@@ -58,7 +58,7 @@ class Youtubedj {
 		return false;
 	}
 
-	function _register_scripts() {
+	public function _register_scripts() {
 		wp_register_script( 'youtubedj', plugins_url( 'js/ytdj.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-slider' ), $this->version, true );
 
 		wp_register_style( 'youtubedj', plugins_url( 'css/style.css', __FILE__ ), array(), $this->version, 'all' );
@@ -67,7 +67,13 @@ class Youtubedj {
 
 	public function default_player( $atts = '' ) {
 		wp_enqueue_script('youtubedj');
-		wp_localize_script( 'youtubedj', 'youtubedj', array( 'ajax' => admin_url( 'admin-ajax.php' ) ) );
+
+		$args = array(
+			'ajax'         => admin_url( 'admin-ajax.php' ),
+			'are_you_sure' => strtoupper( __( 'Are you sure?', 'youtube-dj' ) ),
+			'add_to_queue' => __( 'Add to queue', 'youtube-dj' ),
+		);
+		wp_localize_script( 'youtubedj', 'youtubedj', $args );
 
 		wp_enqueue_style('youtubedj');
 		wp_enqueue_style('youtubedj-jqui');

@@ -12,7 +12,7 @@ window.onbeforeunload = function askConfirm() {
 	"use strict";
 
 	if (needToConfirm) {
-		return "ARE YOU SURE!?";
+		return youtubedj.are_you_sure;
 	}
 };
 
@@ -213,7 +213,7 @@ function onPlayerReady(event) {
 				//buttons += '<a class="fav">Fav</a>';
 
 				if (queue) {
-					buttons += '<a class="queue">Add to queue</a>';
+					buttons += '<a class="queue">' + youtubedj.add_to_queue + '</a>';
 				}
 
 				$.each(decks, function (key, value) {
