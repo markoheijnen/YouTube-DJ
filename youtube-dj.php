@@ -1,12 +1,14 @@
 <?php
 /*
 Plugin Name: YouTube DJ
-Plugin URI: http://github.com/markoheijnen/youtube-dj
+Plugin URI:  http://github.com/markoheijnen/youtube-dj
 Description: Be a DJ with the YouTube DJ Gear. Contributors: Bas van der Lans
 Version: 0.2
-Author: Marko Heijnen
-Author URI: http://markoheijnen.com
-License: GPL2
+Author:      Marko Heijnen
+Author URI:  http://markoheijnen.com
+License:     GPL2
+Text Domain: hello-world
+Domain Path: /languages
 */
 
 /*  Copyright YEAR  YouTube DJ  (email : info@markoheijnen.com)
