@@ -3,7 +3,7 @@
 Plugin Name: YouTube DJ
 Plugin URI:  http://github.com/markoheijnen/youtube-dj
 Description: Be a DJ with the YouTube DJ Gear. Contributors: Bas van der Lans
-Version: 0.2
+Version:     0.3-dev
 Author:      Marko Heijnen
 Author URI:  http://markoheijnen.com
 License:     GPL2
