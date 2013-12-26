@@ -1,5 +1,5 @@
 === YouTube DJ ===
-Contributors: markoheijnen, deLans
+Contributors: CodeKitchen, markoheijnen
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B6M8D4G33FY28
 Tags: youtube, music
 Requires at least: 3.0
@@ -33,6 +33,7 @@ If you got any idea please create a new topic in the support forum.
 
 = 0.3 =
 * Fix localization
+* Update styling a bit more
 
 = 0.2 =
 * Fixes queue
