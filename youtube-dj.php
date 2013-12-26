@@ -106,7 +106,7 @@ class Youtubedj {
 		$html .= '</div>';
 
 		$html .= '<div class="rack-center rack">';
-		$html .= $this->get( 'Mixer' )->html( __( 'Mixes', 'youtube-dj' ), 'deck1', 'deck2' );
+		$html .= $this->get( 'Mixer' )->html( __( 'Mixer', 'youtube-dj' ), 'deck1', 'deck2' );
 		$html .= $this->get( 'Search' )->html( _x( 'Search', 'Compontent title', 'youtube-dj' ), 'queue', array( 'deck1', 'deck2' ) );
 		$html .= $this->get( 'Queue' )->html( 'queue', __( 'Queue', 'youtube-dj' ), array( 'deck1', 'deck2' ), $queue );
 		$html .= '</div>';
