@@ -27,6 +27,7 @@ Domain Path: /languages
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+include 'inc/api.php';
 include 'inc/deck.php';
 include 'inc/mixer.php';
 include 'inc/queue.php';

@@ -29,15 +29,11 @@ class Youtubedj_Search {
 	function search() {
 		header('Content-type: application/json');
 
-		$search      = esc_attr( $_REQUEST['searchTerm'] );
+		$search      = sanitize_text_field( $_REQUEST['searchTerm'] );
 		$max_results = 5;
 		$start_index = absint( $_REQUEST['offset'] );
 
-		//format=5 = embed only and format=1,6 is mobile only
-		$url = 'https://gdata.youtube.com/feeds/api/videos?q=' . $search . '&max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
-
-		$response = wp_remote_get( $url );
-		$data     = json_decode( wp_remote_retrieve_body( $response ) );
+		$data = Youtubedj_API::search( $search, $max_results, $start_index );
 
 		$response = array( 'total' => 0, 'max_results' => $max_results, 'start_index' => $start_index, 'songs' => array() );
 
