@@ -72,7 +72,7 @@ ul.videolist, ul.queuelist {
 
 .fader {
 	height: 65px; 
-	padding: 2px 5px;
+	padding-top: 2px;
 	width: 38px;
 	margin: 5px 0 0 0;
 	float: right;
@@ -81,7 +81,7 @@ ul.videolist, ul.queuelist {
 
 .fader .gain {
 	height: 41px;
-	margin: 10px 0 0 7px;
+	margin: 10px auto 0;
 }
 
 .deck .btns a.stop {
