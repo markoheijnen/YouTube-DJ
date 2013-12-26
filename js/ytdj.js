@@ -278,6 +278,11 @@ function onPlayerReady(event) {
 			var songs = new Array();
 			var list  = this.queue.find('.queuelist');
 
+			$( 'li', list ).each(function( index ) {
+				songs.push($(this).attr('songid'));
+			});
+
+
 			var decks = this.queue.attr('decks');
 			decks = decks.split(',');
 
