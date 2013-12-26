@@ -37,14 +37,14 @@ class Youtubedj {
 	private $version = '0.3-dev';
 	private $objects = array();
 
-	function __construct() {
+	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, '_load' ) );
 		add_shortcode( 'youtubedj', array( $this, 'default_player' ) );
 
 		add_action( 'wp_enqueue_scripts', array( $this, '_register_scripts' ), 1 );
 	}
 
-	function _load() {
+	public function _load() {
 		$this->objects['Deck']   = new Youtubedj_Deck;
 		$this->objects['Mixer']  = new Youtubedj_Mixer;
 		$this->objects['Queue']  = new Youtubedj_Queue;
@@ -114,6 +114,7 @@ class Youtubedj {
 
 		return $html;
 	}
+
 }
 
 $GLOBAL['youtubedj'] = new Youtubedj;

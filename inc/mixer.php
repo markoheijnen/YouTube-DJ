@@ -1,11 +1,12 @@
 <?php
 
 class Youtubedj_Mixer {
-	function __construct() {
+
+	public function __construct() {
 		
 	}
 
-	function html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
+	public function html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
 		$html  = '<div class="mixer gear" deck1="' . $deck1 . '" deck2="' . $deck2 . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
@@ -19,4 +20,5 @@ class Youtubedj_Mixer {
 
 		return $html;
 	}
+
 }

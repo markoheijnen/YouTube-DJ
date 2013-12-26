@@ -1,12 +1,13 @@
 <?php
 
 class Youtubedj_Search {
-	function __construct() {
+
+	public function __construct() {
 		add_action( 'wp_ajax_youtubedj_search', array( $this, 'search' ) );
 		add_action( 'wp_ajax_nopriv_youtubedj_search', array( $this, 'search' ) );
 	}
 
-	function html( $title, $queue, $decks, $value = '' ) {
+	public function html( $title, $queue, $decks, $value = '' ) {
 		$html  = '<div class="search gear" queue="' . $queue . '" decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
@@ -26,7 +27,7 @@ class Youtubedj_Search {
 		return $html;
 	}
 
-	function search() {
+	public function search() {
 		header('Content-type: application/json');
 
 		$max_results = 5;
@@ -37,4 +38,5 @@ class Youtubedj_Search {
 		echo json_encode( $response );
 		wp_die();
 	}
+
 }

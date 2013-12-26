@@ -1,11 +1,12 @@
 <?php
 
 class Youtubedj_Queue {
-	function __construct() {
+
+	public function __construct() {
 		
 	}
 
-	function html( $id, $title, $decks, $queuelist ) {
+	public function html( $id, $title, $decks, $queuelist ) {
 		$html  = '<div id="' . $id . '" class="queue gear" decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
@@ -16,4 +17,5 @@ class Youtubedj_Queue {
 
 		return $html;
 	}
+
 }
