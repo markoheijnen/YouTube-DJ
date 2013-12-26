@@ -37,8 +37,8 @@ class Youtubedj_API {
 					'id'        => $item->id,
 					'title'     => $item->title,
 					'thumbnail' => array( 'normal' => $item->thumbnail->sqDefault, 'high' => $item->thumbnail->hqDefault ),
-					'duration'  => $this->duration,
-					'mobile'    => isset( $this->player->mobile )
+					'duration'  => $item->duration,
+					'mobile'    => isset( $item->player->mobile )
 				) );
 			}
 		}
