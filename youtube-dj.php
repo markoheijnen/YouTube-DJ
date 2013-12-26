@@ -87,14 +87,13 @@ class Youtubedj {
 			$user_data = Youtubedj_API::user_playlist( $_GET['user'] );
 
 			if( $user_data['total'] > 1 ) {
-				$desk1 = $response['songs'][0]['id'];
-				$desk2 = $response['songs'][1]['id'];
-				unset( $response['songs'][0], $response['songs'][1] );
+				$desk1 = $user_data['songs'][0]['id'];
+				$desk2 = $user_data['songs'][1]['id'];
+				unset( $user_data['songs'][0], $user_data['songs'][1] );
 
-				$queue = $response['songs'];
+				$queue = $user_data['songs'];
 			}
 		}
-
 
 		$html  = '<div class="booth">';
 
