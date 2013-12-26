@@ -310,13 +310,17 @@ function onPlayerReady(event) {
 
 					songs.splice(0, 1);
 
-					var _decks = decks;
-					var deck_index = decks.indexOf( deck );
-					if( deck_index != -1 )
-						_decks.splice(deck_index, 1);
+					var _decks = decks.slice(0);
 
-					deck = youtubedj_get( _decks[0] );
-					deck.player.playVideo();
+					var deck_index = _decks.indexOf( deck );
+					if( deck_index != -1 ) {
+						_decks.splice(deck_index, 1);
+					}
+
+					if( _decks[0] ) {
+						deck = youtubedj_get( _decks[0] );
+						deck.player.playVideo();
+					}
 				}
 			}
 		});
