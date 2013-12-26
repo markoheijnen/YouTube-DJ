@@ -5,7 +5,7 @@ class Youtubedj_Queue {
 		
 	}
 
-	function html( $id, $title, $decks ) {
+	function html( $id, $title, $decks, $queuelist ) {
 		$html  = '<div id="' . $id . '" class="queue gear" decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 

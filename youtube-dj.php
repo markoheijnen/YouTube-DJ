@@ -79,20 +79,37 @@ class Youtubedj {
 		wp_enqueue_style('youtubedj');
 		wp_enqueue_style('youtubedj-jqui');
 
+		$desk1 = 'BR_DFMUzX4E';
+		$desk2 = 'sOS9aOIXPEk';
+		$queue = array();
+
+		if( isset( $_GET['user'] ) ) {
+			$user_data = Youtubedj_API::user_playlist( $_GET['user'] );
+
+			if( $user_data['total'] > 1 ) {
+				$desk1 = $response['songs'][0]['id'];
+				$desk2 = $response['songs'][1]['id'];
+				unset( $response['songs'][0], $response['songs'][1] );
+
+				$queue = $response['songs'];
+			}
+		}
+
+
 		$html  = '<div class="booth">';
 
 		$html .= '<div class="rack-left rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck1', __( 'Deck 1', 'youtube-dj' ), 'H6M5npJ83uI', 'queue' );
+		$html .= $this->get( 'Deck' )->html( 'deck1', __( 'Deck 1', 'youtube-dj' ), $desk1, 'queue' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack-right rack">';
-		$html .= $this->get( 'Deck' )->html( 'deck2', __( 'Deck 2', 'youtube-dj' ), 'sOS9aOIXPEk', 'queue' );
+		$html .= $this->get( 'Deck' )->html( 'deck2', __( 'Deck 2', 'youtube-dj' ), $desk2, 'queue' );
 		$html .= '</div>';
 
 		$html .= '<div class="rack-center rack">';
 		$html .= $this->get( 'Mixer' )->html( __( 'Mixes', 'youtube-dj' ), 'deck1', 'deck2' );
 		$html .= $this->get( 'Search' )->html( _x( 'Search', 'Compontent title', 'youtube-dj' ), 'queue', array( 'deck1', 'deck2' ) );
-		$html .= $this->get( 'Queue' )->html( 'queue', __( 'Queue', 'youtube-dj' ), array( 'deck1', 'deck2' ) );
+		$html .= $this->get( 'Queue' )->html( 'queue', __( 'Queue', 'youtube-dj' ), array( 'deck1', 'deck2' ), $queue );
 		$html .= '</div>';
 
 		return $html;
