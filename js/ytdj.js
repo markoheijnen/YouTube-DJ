@@ -165,7 +165,7 @@ function onPlayerReady(event) {
 			var deck2 = $(this).attr('deck2');
 
 			if (deck1.length > 0 && deck2.length > 0) {
-				var defaultvalue = 60;
+				var defaultvalue = 50;
 				var oldvalue = defaultvalue;
 
 				var slider = $('.crossfader', mixer).slider({
