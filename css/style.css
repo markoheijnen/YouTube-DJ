@@ -1,4 +1,4 @@
-.deck .btns a, .fader {
+.gear * {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -152,7 +152,7 @@ li.result {
 }
 
 .mixer .crossfader {
-	width: 228px;
+	width: 221px;
 	float: left;
 	margin: 5px 10px;
 }
