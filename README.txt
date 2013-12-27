@@ -33,6 +33,8 @@ If you got any idea please create a new topic in the support forum.
 
 = 0.3 =
 * Fix localization
+* Add support to use the channel of an artist as a playlist
+* Extended the features for the shortcode
 * Update styling a bit more
 
 = 0.2 =
