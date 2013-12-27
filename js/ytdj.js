@@ -71,7 +71,9 @@ function onPlayerReady(event) {
 				height: '250',
 				width: '320',
 				playerVars: {
-					//controls: 0
+					controls: 0,
+					disablekb: 1,
+					showinfo: 0
 				},
 				videoId: code
 			});
