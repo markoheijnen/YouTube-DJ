@@ -12,8 +12,8 @@ class Youtubedj_Mixer {
 
 		$html .= '<div class="faders">';
 		$html .= '<a class="mixer-button mixer-button-a">' . $deck1_title . '</a>';
-		$html .= '<div class="crossfader"></div>';
 		$html .= '<a class="mixer-button mixer-button-b">' . $deck2_title . '</a>';
+		$html .= '<div class="crossfader"></div>';
 		$html .= '</div>';
 
 		$html .= '</div>';

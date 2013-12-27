@@ -10,11 +10,9 @@
 }
 
 .rack {
-	width: 320px;
 	padding: 0 0 30px 0;
 	float: left;
 	margin: 0 10px 0 0;
-	/* border: solid 1px red; */
 }
 
 .rack-right {
@@ -32,14 +30,13 @@
 }
 
 .gear {
-	width: 320px;
-	float: left;
 	margin: 0 0 20px 0;
 	list-style: none;
 	padding: 0;
 }
 
 .gear h2 {
+	clear: both;
 	margin: 0 0 4px 0;
 	background: #eee;
 	font-size: 1em;
@@ -50,8 +47,8 @@
 	cursor: pointer;
 }
 
-.deck .btns {
-	width: 320px;
+.deck .player {
+	display: block;
 }
 
 .deck .btns a {
@@ -102,7 +99,6 @@ ul.videolist, ul.queuelist {
 
 
 li.result {
-	width: 320px;
 	padding: 4px 0;
 	margin: 0px;
 	border-bottom: solid 1px #eee;
@@ -143,11 +139,10 @@ li.result {
 
 
 .mixer .faders {
-	width: 290px;
 	padding: 5px;
 	background: #627AAD;
 	margin: 0;
-	float: left;
+	overflow: hidden;
 	color: #fff;
 }
 
@@ -156,9 +151,7 @@ li.result {
 }
 
 .mixer .crossfader {
-	width: 221px;
-	float: left;
-	margin: 7px 10px;
+	margin: 7px 25px;
 }
 
 .mixer a.mixer-button {
@@ -170,17 +163,4 @@ li.result {
 
 .mixer a.mixer-button-b {
 	float: right;
-}
-
-.form {
-	width: 320px;
-	height: 40px;
-	float: left;
-}
-.clear {
-	clear: both;
-}
-.text {
-	float: left; 
-	width: 320px;
 }
