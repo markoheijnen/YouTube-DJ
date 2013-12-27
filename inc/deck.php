@@ -10,6 +10,7 @@ class Youtubedj_Deck {
 		$html  = '<div id="' . $id . '" class="deck gear">';
 		$html .= '<h2>' . $title . '</h2>';
 
+		$html .= '<div class="player-holder">';
 		$html .= '<div id="' . $id . '-player" class="player"';
 
 		if( $movie_code ) {
@@ -20,7 +21,7 @@ class Youtubedj_Deck {
 			$html .= ' queue="' . $queue . '"';
 		}
 
-		$html .= '></div>';
+		$html .= '></div></div>';
 
 		$html .= '<div class="btns">';
 		$html .= '<a class="play">' . __( 'Play', 'youtube-dj' ) . '</a>';
