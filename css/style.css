@@ -5,6 +5,10 @@
 	box-sizing: border-box;
 }
 
+.booth {
+	margin: 20px 0;
+}
+
 .rack {
 	width: 320px;
 	padding: 0 0 30px 0;
