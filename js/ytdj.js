@@ -86,7 +86,7 @@ function onPlayerReady(event) {
 			this.deck      = $(this);
 			this.player    = null;
 			this.player_id = this.deck.find('.player').attr('id');
-			this.code      = this.deck.find('.player').attr('movie');
+			this.code      = this.deck.find('.player').data('movie');
 
 			youtubedj_set(this.deck.attr('id'), this);
 
@@ -163,8 +163,8 @@ function onPlayerReady(event) {
 
 		return this.each(function () {
 			var mixer = $(this);
-			var deck1 = $(this).attr('deck1');
-			var deck2 = $(this).attr('deck2');
+			var deck1 = $(this).data('deck1');
+			var deck2 = $(this).data('deck2');
 
 			if (deck1.length > 0 && deck2.length > 0) {
 				var defaultvalue = 50;
@@ -220,7 +220,7 @@ function onPlayerReady(event) {
 
 				$.each(decks, function (key, value) {
 					var title = $('#' + value).find('h2').html();
-					buttons += '<a class="loadsong" deck="' + value + '">' + title + '</a>';
+					buttons += '<a class="loadsong" data-deck="' + value + '">' + title + '</a>';
 				});
 
 				var html = '<ul class="videolist">';
@@ -244,7 +244,7 @@ function onPlayerReady(event) {
 
 		return this.each(function () {
 			var search  = $(this);
-			var queue   = search.attr('queue');
+			var queue   = search.data('queue');
 			var results = $('.searchResults', search);
 
 			$('form', search).click(function (evt) {
@@ -252,14 +252,14 @@ function onPlayerReady(event) {
 				var searchTerm = $('.searchTerm', search).val();
 
 				if (searchTerm.length > 0) {
-					load_data(results, searchTerm, 1, search.attr('decks'), queue);
+					load_data(results, searchTerm, 1, search.data('decks'), queue);
 				}
 			});
 
 			$(search).on("click", '.loadsong', function (evt) {
 				evt.preventDefault();
 
-				var deck = youtubedj_get($(this).attr('deck'));
+				var deck = youtubedj_get($(this).data('deck'));
 				deck.player.cueVideoById($(this).closest('.song').attr('id'), 0, 'small');
 			});
 
@@ -281,11 +281,11 @@ function onPlayerReady(event) {
 			var list  = this.queue.find('.queuelist');
 
 			$( 'li', list ).each(function( index ) {
-				songs.push($(this).attr('songid'));
+				songs.push($(this).data('songid'));
 			});
 
 
-			var decks = this.queue.attr('decks');
+			var decks = this.queue.data('decks');
 			decks = decks.split(',');
 
 			//var queue;
@@ -293,7 +293,7 @@ function onPlayerReady(event) {
 				if(!in_array(songs, songid)) {
 					songs.push(songid);
 
-					var html = '<li songid="' + songid + '" class="song">';
+					var html = '<li data-songid="' + songid + '" class="song">';
 					html += '<h5>' + $('#' + songid).find('h5').html() + '</h5>';
 					html += '</li>';
 
@@ -306,7 +306,7 @@ function onPlayerReady(event) {
 					var currentdeck = youtubedj_get( deck );
 					currentdeck.player.cueVideoById( songs[0], 0, 'small');
 
-					list.find('li[songid="' + songs[0] + '"]' ).hide( 1000, function() {
+					list.find('li[data-songid="' + songs[0] + '"]' ).hide( 1000, function() {
 						$(this).remove();
 					});
 

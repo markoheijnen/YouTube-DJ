@@ -7,7 +7,7 @@ class Youtubedj_Mixer {
 	}
 
 	public function html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
-		$html  = '<div class="mixer gear" deck1="' . $deck1 . '" deck2="' . $deck2 . '">';
+		$html  = '<div class="mixer gear" data-deck1="' . $deck1 . '" data-deck2="' . $deck2 . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
 		$html .= '<div class="faders">';

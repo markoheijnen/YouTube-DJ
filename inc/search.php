@@ -8,7 +8,7 @@ class Youtubedj_Search {
 	}
 
 	public function html( $title, $queue, $decks, $value = '' ) {
-		$html  = '<div class="search gear" queue="' . $queue . '" decks="' . implode( ',', $decks ) . '">';
+		$html  = '<div class="search gear" data-queue="' . $queue . '" data-decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
 		$html .= '<form action="" method="post">';
