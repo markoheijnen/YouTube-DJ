@@ -3,6 +3,25 @@
 class Youtubedj_API {
 	//format=5 = embed only and format=1,6 is mobile only
 
+	public static function user_info( $user ) {
+		$user = sanitize_text_field( $user );
+		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '?v=2';
+
+		$data     = array();
+		$response = wp_remote_get( $url );
+		$body     = wp_remote_retrieve_body( $response );
+
+		if( $body ) {
+			$xml = simplexml_load_string( $body );
+
+			$data['id']         = (string) $xml->author->children( 'http://gdata.youtube.com/schemas/2007' );
+			$data['photo']      = (string) $xml->children( 'http://search.yahoo.com/mrss/' )->thumbnail->attributes()['url'];
+			$data['background'] = 'http://i1.ytimg.com/u/' . $data['id'] . '/channels4_banner_hd.jpg';
+		}
+
+		return $data;
+	}
+
 	public static function user_playlist( $user, $max_results = 25, $start_index = 1 ) {
 		$user = sanitize_text_field( $user );
 		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
