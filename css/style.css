@@ -27,6 +27,7 @@
 .rack-center {
 	float: none;
 	margin: 0px auto;
+	overflow: hidden;
 }
 
 .gear {
