@@ -10,14 +10,13 @@
 }
 
 .rack {
-	padding: 0 0 30px 0;
 	float: left;
-	margin: 0 10px 0 0;
+	margin: 0 10px 30px 0;
 }
 
 .rack-right {
 	float: right;
-	margin: 0 0 0 10px;
+	margin: 0 0 30px 10px;
 }
 
 .rack-right .deck {
@@ -34,6 +33,7 @@
 	margin: 0 0 20px 0;
 	list-style: none;
 	padding: 0;
+	overflow: hidden;
 }
 
 .gear h2 {
@@ -177,4 +177,17 @@ li.result {
 
 .mixer a.mixer-button-b {
 	float: right;
+}
+
+@media screen and (max-width: 750px) {
+	.rack-center {
+		clear: both;
+	}
+}
+
+@media screen and (max-width: 610px) {
+	.rack {
+		float: none;
+		margin: 0 0 30px 0;
+	}
 }
