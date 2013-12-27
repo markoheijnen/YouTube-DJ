@@ -115,6 +115,8 @@ class Youtubedj {
 		$html .= $this->get( 'Queue' )->html( 'queue', __( 'Queue', 'youtube-dj' ), array( 'deck1', 'deck2' ), $queue );
 		$html .= '</div>';
 
+		$html .= '</div>';
+
 		return $html;
 	}
 

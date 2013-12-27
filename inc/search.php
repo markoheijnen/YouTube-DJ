@@ -11,7 +11,7 @@ class Youtubedj_Search {
 		$html  = '<div class="search gear" data-queue="' . $queue . '" data-decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
-		$html .= '<form action="" method="post">';
+		$html .= '<form action="#" method="post">';
 		$html .= '<input name="searchTerm" class="searchTerm" type="text" value="' . $value . '" placeholder="' . __( 'Your song', 'youtube-dj' ) . '" />';
 		$html .= '<input type="submit" value="' . _x( 'Search', 'Search button', 'youtube-dj' ) . '" />';
 		$html .= '</form>';
