@@ -52,8 +52,8 @@ function onStateChange( newState ) {
 	if( newState.data == YT.PlayerState.PLAYING || newState.data == YT.PlayerState.BUFFERING ) {
 	}
 	else if( newState.data == YT.PlayerState.ENDED ) {
-		queue.play_next( newState.target.a.parentNode.getAttribute('id') );
 		var queue = youtubedj_get( newState.target.a.getAttribute('data-queue') );
+		queue.play_next( newState.target.a.parentNode.parentNode.getAttribute('id') );
 	}
 }
 
