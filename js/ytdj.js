@@ -73,7 +73,8 @@ function onPlayerReady(event) {
 				playerVars: {
 					controls: 0,
 					disablekb: 1,
-					showinfo: 0
+					showinfo: 0,
+					iv_load_policy: 3
 				},
 				videoId: code
 			});
