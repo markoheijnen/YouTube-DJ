@@ -281,6 +281,9 @@ function onPlayerReady(event) {
 			var songs = new Array();
 			var list  = this.queue.find('.queuelist');
 
+			list.sortable();
+    		list.disableSelection();
+
 			$( 'li', list ).each(function( index ) {
 				songs.push($(this).data('songid'));
 			});
