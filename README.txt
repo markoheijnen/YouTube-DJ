@@ -31,6 +31,15 @@ If you got any idea please create a new topic in the support forum.
 
 == Changelog ==
 
+= 0.4 =
+* Make as responsive as we could make it
+* Better structure of the HTML
+* Usage of data attributes and other HTML fixes to make it HTML compliant
+* Simplified the YouTube player
+* Queue is now sortable
+* Add remove buttons to the queue
+* Style hover on items in the queue and search list
+
 = 0.3 =
 * Fix localization
 * Add support to use the channel of an artist as a playlist
