@@ -13,7 +13,10 @@ class Youtubedj_Queue {
 		$html .= '<ul class="queuelist videolist">';
 
 		foreach( $queuelist as $item ) {
-			$html .= '<li data-songid="' . $item['id'] . '" class="song"><h5>' . $item['title'] . '</h5></li>';
+			$html .= '<li data-songid="' . $item['id'] . '" class="song">';
+			$html .= '<h5>' . $item['title'] . '</h5>';
+			$html .= ' <span class="song-buttons"><a href="#" class="song-delete dashicons dashicons-dismiss"></a></span>';
+			$html .= '</li>';
 		}
 
 		$html .= '</ul>';

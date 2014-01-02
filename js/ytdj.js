@@ -250,6 +250,7 @@ function onPlayerReady(event) {
 
 			$('form', search).click(function (evt) {
 				evt.preventDefault();
+
 				var searchTerm = $('.searchTerm', search).val();
 
 				if (searchTerm.length > 0) {
@@ -267,6 +268,7 @@ function onPlayerReady(event) {
 			if (queue) {
 				$(search).on("click", '.queue', function (evt) {
 					evt.preventDefault();
+
 					youtubedj_get(queue).add($(this).closest('.song').attr('id'));
 				});
 			}
@@ -288,6 +290,14 @@ function onPlayerReady(event) {
 				songs.push($(this).data('songid'));
 			});
 
+			$(list).on('click', '.song-delete', function (evt) {
+				evt.preventDefault();
+
+				$(this).closest('li').slideUp( 500, function() {
+					$(this).remove();
+				});
+			});
+
 
 			var decks = this.queue.data('decks');
 			decks = decks.split(',');
@@ -299,6 +309,7 @@ function onPlayerReady(event) {
 
 					var html = '<li data-songid="' + songid + '" class="song">';
 					html += '<h5>' + $('#' + songid).find('h5').html() + '</h5>';
+					html += ' <span class="song-buttons"><a href="#" class="song-delete dashicons dashicons-dismiss"></a></span>';
 					html += '</li>';
 
 					list.append(html);

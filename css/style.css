@@ -94,9 +94,45 @@ ul.videolist h5 {
 	margin: 0;
 }
 
+ul.videolist a:hover {
+	text-decoration: none;
+}
+
 ul.videolist li:hover {
 	background: #eee;
 }
+
+ul.queuelist li { 
+	position: relative;
+}
+ul.queuelist h5 { 
+	margin-right: 20px;
+}
+
+ul.queuelist .song-buttons {
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 7px;
+	height: 100%;
+}
+
+ul.queuelist li:hover .song-buttons {
+	display: block;
+}
+
+ul.queuelist .dashicons {
+	vertical-align: middle;
+}
+
+ul.queuelist .dashicons-dismiss {
+	color: #a00;
+}
+
+ul.queuelist .dashicons-dismiss:hover {
+	color: #f00;
+}
+
 
 .fader {
 	height: 65px; 
