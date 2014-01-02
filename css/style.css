@@ -79,10 +79,23 @@
 	text-align: center;
 }
 
-ul.videolist, ul.queuelist {
+ul.videolist {
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+
+ul.videolist li {
+	cursor: pointer;
+	padding: 10px 10px;
+}
+
+ul.videolist h5 {
+	margin: 0;
+}
+
+ul.videolist li:hover {
+	background: #eee;
 }
 
 .fader {
