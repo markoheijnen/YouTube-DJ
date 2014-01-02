@@ -45,7 +45,7 @@
 	font-weight: bold;
 	display: inline-block;
 	text-transform: uppercase;
-	cursor: pointer;
+	cursor: default;
 }
 
 .deck .player-holder {
