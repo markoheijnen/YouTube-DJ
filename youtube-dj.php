@@ -3,7 +3,7 @@
 Plugin Name: YouTube DJ
 Plugin URI:  http://github.com/markoheijnen/youtube-dj
 Description: Be a DJ with the YouTube DJ Gear.
-Version:     0.3
+Version:     0.4-dev
 Author:      Marko Heijnen
 Author URI:  http://markoheijnen.com
 License:     GPL2
@@ -34,7 +34,7 @@ include 'inc/queue.php';
 include 'inc/search.php';
 
 class Youtubedj {
-	private $version = '0.3';
+	private $version = '0.4-dev';
 	private $objects = array();
 
 	public function __construct() {
