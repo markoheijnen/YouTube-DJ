@@ -77,7 +77,7 @@ class Youtubedj {
 
 		$args = array(
 			'ajax'         => admin_url( 'admin-ajax.php' ),
-			'are_you_sure' => strtoupper( __( 'Are you sure?', 'youtube-dj' ) ),
+			'are_you_sure' => __( 'Are you sure you want to stop the music?', 'youtube-dj' ),
 			'add_to_queue' => __( 'Add to queue', 'youtube-dj' ),
 		);
 		wp_localize_script( 'youtubedj', 'youtubedj', $args );
