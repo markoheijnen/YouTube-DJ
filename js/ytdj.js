@@ -8,10 +8,11 @@
 
 //onError
 var needToConfirm = false;
+
 window.onbeforeunload = function askConfirm() {
 	"use strict";
 
-	if (needToConfirm) {
+	if (needToConfirm && ! jQuery('#closeModal').is(':visible') ) {
 		return youtubedj.are_you_sure;
 	}
 };
@@ -65,6 +66,29 @@ function onPlayerReady(event) {
 (function ($) {
 	"use strict";
 
+	var follow_link = false;
+
+	$('a').click(function(event) {
+		follow_link = $(this).attr('href');
+
+		if( ! needToConfirm || event.isDefaultPrevented() || ! follow_link ) {
+			return;
+		}
+
+		event.preventDefault();
+
+		$('#closeModal').modal();
+	});
+
+	$('.btn-follow-link').on('click', function(evt) {
+		if( follow_link ) {
+			window.location.href = follow_link;
+		}
+
+		$('#closeModal').modal('hide');
+	})
+
+
 	$.fn.deck = function () {
 		function load_player(id, code) {
 			var player = new YT.Player(id, {
@@ -97,7 +121,9 @@ function onPlayerReady(event) {
 				this.player.addEventListener("onStateChange", "onStateChange");
 			}
 
-			$('.play', this.deck).click(function () {
+			$('.play', this.deck).click(function (evt) {
+				evt.preventDefault();
+
 				if (deck.player) {
 					deck.player.playVideo();
 					needToConfirm = true;

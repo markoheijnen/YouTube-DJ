@@ -117,7 +117,33 @@ class Youtubedj {
 
 		$html .= '</div>';
 
+		add_action( 'wp_footer', array( $this, 'load_close_dialog' ) );
+
 		return $html;
+	}
+
+	public function load_close_dialog() {
+		?>
+
+			<div class="modal fade" id="closeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel"><?php _e( 'Stopping the music', 'youtube-dj' ); ?></h4>
+						</div>
+						<div class="modal-body">
+							<p><?php _e( 'Are you sure you want to stop the music?', 'youtube-dj' ); ?></p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default btn-follow-link"><?php _e( 'Leave this page', 'youtube-dj' ); ?></button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal"><?php _e( 'Stay on this page', 'youtube-dj' ); ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	<?php
 	}
 
 }
