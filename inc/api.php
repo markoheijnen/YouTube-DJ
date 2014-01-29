@@ -32,6 +32,18 @@ class Youtubedj_API {
 		return self::normalize( $data );
 	}
 
+
+	public static function playlist( $playlist, $max_results = 25, $start_index = 1 ) {
+		$playlist = sanitize_text_field( $playlist );
+		$url  = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
+
+		$response = wp_remote_get( $url );
+		$data     = json_decode( wp_remote_retrieve_body( $response ) );
+
+		return self::normalize( $data );
+	}
+
+
 	public static function search( $search, $max_results = 25, $start_index = 1 ) {
 		$search = sanitize_text_field( $search );
 		$url    = 'https://gdata.youtube.com/feeds/api/videos?q=' . $search . '&max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
