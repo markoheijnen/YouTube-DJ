@@ -124,20 +124,20 @@ function onPlayerReady(event) {
 			$('.play', this.deck).click(function (evt) {
 				evt.preventDefault();
 
-				if (deck.player && this.player) {
+				if ( typeof deck.player.playVideo == 'function' ) {
 					deck.player.playVideo();
 					needToConfirm = true;
 				}
 			});
 
 			$('.pause', this.deck).click(function () {
-				if (deck.player && this.player) {
+				if ( typeof deck.player.playVideo == 'function' ) {
 					deck.player.pauseVideo();
 				}
 			});
 
 			$('.stop', this.deck).click(function () {
-				if (deck.player && this.player) {
+				if ( typeof deck.player.playVideo == 'function' ) {
 					deck.player.stopVideo();
 					needToConfirm = false;
 				}
@@ -149,7 +149,7 @@ function onPlayerReady(event) {
 				max: 100,
 				value: 100,
 				slide: function (event, ui) {
-					if (deck.player && this.player) {
+					if ( typeof deck.player.playVideo == 'function' ) {
 						deck.player.setVolume(ui.value);
 					}
 				}
