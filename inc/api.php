@@ -12,10 +12,11 @@ class Youtubedj_API {
 		$body     = wp_remote_retrieve_body( $response );
 
 		if( $body ) {
-			$xml = simplexml_load_string( $body );
+			$xml        = simplexml_load_string( $body );
+			$attributes = $xml->children( 'http://search.yahoo.com/mrss/' )->thumbnail->attributes();
 
 			$data['id']         = (string) $xml->author->children( 'http://gdata.youtube.com/schemas/2007' );
-			$data['photo']      = (string) $xml->children( 'http://search.yahoo.com/mrss/' )->thumbnail->attributes()['url'];
+			$data['photo']      = (string) $attributes['url'];
 			$data['background'] = 'http://i1.ytimg.com/u/' . $data['id'] . '/channels4_banner_hd.jpg';
 		}
 
@@ -35,7 +36,7 @@ class Youtubedj_API {
 
 	public static function playlist( $playlist, $max_results = 25, $start_index = 1 ) {
 		$playlist = sanitize_text_field( $playlist );
-		$url  = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
+		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
 
 		$response = wp_remote_get( $url );
 		$data     = json_decode( wp_remote_retrieve_body( $response ) );
