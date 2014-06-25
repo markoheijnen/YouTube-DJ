@@ -45,6 +45,10 @@ class Youtubedj {
 	}
 
 	public function _load() {
+		if ( $this->objects ) {
+			return;
+		}
+
 		$this->objects['Deck']   = new Youtubedj_Deck;
 		$this->objects['Mixer']  = new Youtubedj_Mixer;
 		$this->objects['Queue']  = new Youtubedj_Queue;
