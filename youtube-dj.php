@@ -74,9 +74,9 @@ class Youtubedj {
 
 	public function default_player( $atts = '' ) {
 		extract( shortcode_atts( array(
-			'desk1' => 'BR_DFMUzX4E',
-			'desk2' => 'sOS9aOIXPEk',
-			'user'  => false,
+			'desk1'    => 'BR_DFMUzX4E',
+			'desk2'    => 'sOS9aOIXPEk',
+			'user'     => isset( $_GET['user'] ) ? $_GET['user'] : false,
 		), $atts ) );
 
 		wp_enqueue_script('youtubedj');
@@ -93,8 +93,8 @@ class Youtubedj {
 
 		$queue = array();
 
-		if( ! $user && isset( $_GET['user'] ) ) {
-			$user_data = Youtubedj_API::user_playlist( $_GET['user'] );
+		if( $user ) {
+			$user_data = Youtubedj_API::user_playlist( $user );
 
 			if( $user_data['total'] > 1 ) {
 				$desk1 = $user_data['songs'][0]['id'];
