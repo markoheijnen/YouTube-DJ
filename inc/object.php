@@ -9,6 +9,11 @@ class Youtubedj_Object {
 
 	public function html() {
 		$method = array( $this, 'get_html' );
+
+		if ( ! is_callable( $method ) ) {
+			return '';
+		}
+
 		$args   = func_get_args();
 		$html   = call_user_func_array( $method, $args );
 
@@ -18,10 +23,6 @@ class Youtubedj_Object {
 		else {
 			return $html;
 		}
-	}
-
-	protected function get_html() {
-		return '';
 	}
 
 }
