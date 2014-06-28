@@ -1,13 +1,27 @@
 <?php
 
-class Youtubedj_Search {
+class Youtubedj_Search extends Youtubedj_Object {
 
 	public function __construct() {
+		parent::__construct();
+
 		add_action( 'wp_ajax_youtubedj_search', array( $this, 'search' ) );
 		add_action( 'wp_ajax_nopriv_youtubedj_search', array( $this, 'search' ) );
 	}
 
-	public function html( $title, $queue, $decks, $value = '' ) {
+	public function search() {
+		header('Content-type: application/json');
+
+		$max_results = 5;
+		$start_index = absint( $_REQUEST['offset'] );
+
+		$response = Youtubedj_API::search( $_REQUEST['searchTerm'], $max_results, $start_index );
+
+		echo json_encode( $response );
+		wp_die();
+	}
+
+	protected function get_html( $title, $queue, $decks, $value = '' ) {
 		$html  = '<div class="search gear" data-queue="' . $queue . '" data-decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 
@@ -25,18 +39,6 @@ class Youtubedj_Search {
 		$html .= '</div>';
 
 		return $html;
-	}
-
-	public function search() {
-		header('Content-type: application/json');
-
-		$max_results = 5;
-		$start_index = absint( $_REQUEST['offset'] );
-
-		$response = Youtubedj_API::search( $_REQUEST['searchTerm'], $max_results, $start_index );
-
-		echo json_encode( $response );
-		wp_die();
 	}
 
 }

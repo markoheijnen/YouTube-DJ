@@ -1,12 +1,8 @@
 <?php
 
-class Youtubedj_Mixer {
+class Youtubedj_Mixer extends Youtubedj_Object {
 
-	public function __construct() {
-		
-	}
-
-	public function html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
+	protected function get_html( $title, $deck1, $deck2, $deck1_title = 'A', $deck2_title = 'B' ) {
 		$html  = '<div class="mixer gear" data-deck1="' . $deck1 . '" data-deck2="' . $deck2 . '">';
 		$html .= '<h2>' . $title . '</h2>';
 

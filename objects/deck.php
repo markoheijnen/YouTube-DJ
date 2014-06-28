@@ -1,12 +1,8 @@
 <?php
 
-class Youtubedj_Deck {
+class Youtubedj_Deck extends Youtubedj_Object {
 
-	public function __construct() {
-		
-	}
-
-	public function html( $id, $title, $movie_code = false, $queue = false ) {
+	protected function get_html( $id, $title, $movie_code = false, $queue = false ) {
 		$html  = '<div id="' . $id . '" class="deck gear">';
 		$html .= '<h2>' . $title . '</h2>';
 

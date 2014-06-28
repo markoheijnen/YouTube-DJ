@@ -1,12 +1,8 @@
 <?php
 
-class Youtubedj_Queue {
+class Youtubedj_Queue extends Youtubedj_Object {
 
-	public function __construct() {
-		
-	}
-
-	public function html( $id, $title, $decks, $queuelist = array() ) {
+	protected function get_html( $id, $title, $decks, $queuelist = array() ) {
 		$html  = '<div id="' . $id . '" class="queue gear" data-decks="' . implode( ',', $decks ) . '">';
 		$html .= '<h2>' . $title . '</h2>';
 

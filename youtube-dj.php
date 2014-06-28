@@ -11,7 +11,7 @@ Text Domain: youtube-dj
 Domain Path: /languages
 */
 
-/*  Copyright 2013  YouTube DJ  (email : info@markoheijnen.com)
+/*  Copyright 2013-2014 YouTube DJ  (email : info@markoheijnen.com)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as 
@@ -28,10 +28,12 @@ Domain Path: /languages
 */
 
 include 'inc/api.php';
-include 'inc/deck.php';
-include 'inc/mixer.php';
-include 'inc/queue.php';
-include 'inc/search.php';
+include 'inc/object.php';
+
+include 'objects/deck.php';
+include 'objects/mixer.php';
+include 'objects/queue.php';
+include 'objects/search.php';
 
 class Youtubedj {
 	private $version = '0.4-dev';
