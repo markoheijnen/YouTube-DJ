@@ -62,6 +62,10 @@ class Youtubedj_API {
 		$url .= '&format=1,5,6'; //format=5 = embed only and format=1,6 is mobile only
 		$url .= '&v=2&alt=jsonc';
 
+		if ( ! self::being_cached() ) {
+			$url .= '&restriction=' . self::get_ip_address();
+		}
+
 		$response = wp_remote_get( esc_url_raw( $url ) );
 		$data     = json_decode( wp_remote_retrieve_body( $response ) );
 
