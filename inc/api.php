@@ -1,7 +1,18 @@
 <?php
 
 class Youtubedj_API {
-	//format=5 = embed only and format=1,6 is mobile only
+	private static $max_results = 25;
+	private static $start_index = 1;
+
+
+	public static function set_max_results( $amount ) {
+		self::$max_results = absint( $amount );
+	}
+
+	public static function set_start_index( $amount ) {
+		self::$start_index = absint( $amount );
+	}
+
 
 	public static function user_info( $user ) {
 		$user = sanitize_text_field( $user );
@@ -23,38 +34,39 @@ class Youtubedj_API {
 		return $data;
 	}
 
-	public static function user_playlist( $user, $max_results = 25, $start_index = 1 ) {
+	public static function user_playlist( $user ) {
 		$user = sanitize_text_field( $user );
-		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
+		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '/uploads?';
 
-		$response = wp_remote_get( $url );
-		$data     = json_decode( wp_remote_retrieve_body( $response ) );
-
-		return self::normalize( $data );
+		return self::get_data( $url );
 	}
 
-
-	public static function playlist( $playlist, $max_results = 25, $start_index = 1 ) {
+	public static function playlist( $playlist ) {
 		$playlist = sanitize_text_field( $playlist );
-		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
+		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?';
 
-		$response = wp_remote_get( $url );
-		$data     = json_decode( wp_remote_retrieve_body( $response ) );
-
-		return self::normalize( $data );
+		return self::get_data( $url );
 	}
 
-
-	public static function search( $search, $max_results = 25, $start_index = 1 ) {
+	public static function search( $search ) {
 		$search = sanitize_text_field( $search );
-		$url    = 'https://gdata.youtube.com/feeds/api/videos?q=' . $search . '&max-results=' . $max_results . '&start-index=' . $start_index . '&format=1,5,6&v=2&alt=jsonc';
+		$url    = 'https://gdata.youtube.com/feeds/api/videos?q=' . $search . '&';
 
-		$response = wp_remote_get( $url );
+		return self::get_data( $url );
+	}
+
+
+
+	private static function get_data( $url ) {
+		$url .= 'max-results=' . self::$max_results . '&start-index=' . self::$start_index;
+		$url .= '&format=1,5,6'; //format=5 = embed only and format=1,6 is mobile only
+		$url .= '&v=2&alt=jsonc';
+
+		$response = wp_remote_get( esc_url_raw( $url ) );
 		$data     = json_decode( wp_remote_retrieve_body( $response ) );
 
 		return self::normalize( $data );
 	}
-
 
 	private static function normalize( $data ) {
 		$response = array( 'total' => 0, 'max_results' => $max_results, 'start_index' => $start_index, 'songs' => array() );
