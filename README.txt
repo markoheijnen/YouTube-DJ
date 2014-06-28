@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: youtube, music
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 0.3
+Stable tag: 0.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,12 +33,16 @@ If you got any idea please create a new topic in the support forum.
 
 = 0.4 =
 * Make as responsive as we could make it
-* Better structure of the HTML
+* Better structure of the HTML which can be filtered.
 * Usage of data attributes and other HTML fixes to make it HTML compliant
 * Simplified the YouTube player
 * Queue is now sortable
 * Add remove buttons to the queue
 * Style hover on items in the queue and search list
+* Add playlist support
+* Basic check to not show movies you can't watch
+* Other little bug fixes and hardening
+* Add nice modal when trying to exit the page by clicking on a link
 
 = 0.3 =
 * Fix localization
