@@ -43,7 +43,7 @@ class Youtubedj_API {
 
 	public static function playlist( $playlist ) {
 		$playlist = sanitize_text_field( $playlist );
-		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '/uploads?';
+		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '?';
 
 		return self::get_data( $url );
 	}
@@ -81,6 +81,10 @@ class Youtubedj_API {
 			$items                   = $data->data->items;
 
 			foreach( $items as $item ) {
+				if ( ! isset( $item->title ) && isset( $item->video, $item->video->title ) ) {
+					$item = $item->video;
+				}
+
 				array_push( $response['songs'], array(
 					'id'        => $item->id,
 					'title'     => $item->title,
