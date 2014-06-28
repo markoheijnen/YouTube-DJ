@@ -12,10 +12,10 @@ class Youtubedj_Search extends Youtubedj_Object {
 	public function search() {
 		header('Content-type: application/json');
 
-		$max_results = 5;
-		$start_index = absint( $_REQUEST['offset'] );
+		Youtubedj_API::set_max_results( 5 );
+		Youtubedj_API::set_start_index( $_REQUEST['offset'] );
 
-		$response = Youtubedj_API::search( $_REQUEST['searchTerm'], $max_results, $start_index );
+		$response = Youtubedj_API::search( $_REQUEST['searchTerm'] );
 
 		echo json_encode( $response );
 		wp_die();
