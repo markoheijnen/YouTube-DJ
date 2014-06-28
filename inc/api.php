@@ -78,4 +78,29 @@ class Youtubedj_API {
 		return $response;
 	}
 
+
+	private static function get_ip_address() {
+		$remote_ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : null;
+
+		$remote_ip = preg_replace( '/[^0-9a-fA-F:., ]/', '', $remote_ip );
+
+		return $remote_ip;
+	}
+
+	private static function being_cached() {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			return false;
+		}
+
+		if ( ! defined( 'WP_CACHE' ) || ! WP_CACHE ) {
+			return false;
+		}
+
+		if ( is_user_logged_in() ) {
+			return false;
+		}
+
+		return true;
+	}
+
 }
