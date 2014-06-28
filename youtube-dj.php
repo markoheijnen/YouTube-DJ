@@ -77,6 +77,7 @@ class Youtubedj {
 			'desk1'    => 'BR_DFMUzX4E',
 			'desk2'    => 'sOS9aOIXPEk',
 			'user'     => isset( $_GET['user'] ) ? $_GET['user'] : false,
+			'playlist' => isset( $_GET['playlist'] ) ? $_GET['playlist'] : false,
 		), $atts ) );
 
 		wp_enqueue_script('youtubedj');
@@ -91,6 +92,7 @@ class Youtubedj {
 		wp_enqueue_style('youtubedj');
 		wp_enqueue_style('youtubedj-jqui');
 
+
 		$queue = array();
 
 		if( $user ) {
@@ -104,6 +106,18 @@ class Youtubedj {
 				$queue = $user_data['songs'];
 			}
 		}
+		else if( $playlist ) {
+			$playlist_data = Youtubedj_API::playlist( $playlist );
+
+			if( $playlist_data['total'] > 1 ) {
+				$desk1 = $playlist_data['songs'][0]['id'];
+				$desk2 = $playlist_data['songs'][1]['id'];
+				unset( $playlist_data['songs'][0], $playlist_data['songs'][1] );
+
+				$queue = $playlist_data['songs'];
+			}
+		}
+
 
 		$html  = '<div class="booth">';
 
