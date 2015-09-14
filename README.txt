@@ -1,6 +1,6 @@
 === YouTube DJ ===
 Contributors: CodeKitchen, markoheijnen
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B6M8D4G33FY28
+Donate link: https://markoheijnen.com/donate
 Tags: youtube, music
 Requires at least: 3.5
 Tested up to: 4.3

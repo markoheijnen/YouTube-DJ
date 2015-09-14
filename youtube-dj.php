@@ -1,11 +1,15 @@
 <?php
 /*
 Plugin Name: YouTube DJ
-Plugin URI:  http://github.com/markoheijnen/youtube-dj
 Description: Be a DJ with the YouTube DJ Gear.
 Version:     0.4
+
+Plugin URI:  http://github.com/markoheijnen/youtube-dj
+
 Author:      Marko Heijnen
 Author URI:  http://markoheijnen.com
+Donate link: https://markoheijnen.com/donate
+
 License:     GPL2
 Text Domain: youtube-dj
 Domain Path: /languages
