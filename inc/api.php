@@ -1,6 +1,10 @@
 <?php
 
 class Youtubedj_API {
+	const url = 'https://www.googleapis.com/youtube/v3/';
+
+	private static $key = 'some-key';
+
 	private static $max_results = 25;
 	private static $start_index = 1;
 
@@ -15,112 +19,113 @@ class Youtubedj_API {
 
 
 	public static function user_info( $user ) {
-		$user = sanitize_text_field( $user );
-		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '?v=2';
+		$args = array(
+			'part'        => 'id',
+			'forUsername' => sanitize_text_field( $user )
+		);
+		$response = self::get_data( 'channels', $args );
 
-		$data     = array();
-		$response = wp_remote_get( $url );
-		$body     = wp_remote_retrieve_body( $response );
+		$args = array(
+			'part'        => 'brandingSettings,snippet',
+			'id' => $response->items[0]->id
+		);
+		$response = self::get_data( 'channels', $args );
 
-		if( $body ) {
-			$xml        = simplexml_load_string( $body );
-			$attributes = $xml->children( 'http://search.yahoo.com/mrss/' )->thumbnail->attributes();
-
-			$data['id']         = (string) $xml->author->children( 'http://gdata.youtube.com/schemas/2007' );
-			$data['photo']      = (string) $attributes['url'];
-			$data['background'] = 'http://i1.ytimg.com/u/' . $data['id'] . '/channels4_banner_hd.jpg';
+		$data = array();
+		if ( $response ) {
+			$data['id']          = $response->items[0]->id;
+			$data['title']       = $response->items[0]->snippet->title;
+			$data['description'] = $response->items[0]->snippet->description;
+			$data['photo']       = $response->items[0]->snippet->thumbnails->medium->url;
+			$data['background']  = $response->items[0]->brandingSettings->image->bannerImageUrl;
 		}
 
 		return $data;
 	}
 
 	public static function user_playlist( $user ) {
-		$user = sanitize_text_field( $user );
-		$url  = 'https://gdata.youtube.com/feeds/api/users/' . $user . '/uploads?';
+		$args = array(
+			'part'        => 'contentDetails',
+			'forUsername' => sanitize_text_field( $user )
+		);
+		$response = self::get_data( 'channels', $args );
 
-		return self::get_data( $url );
+		$args = array(
+			'part'        => 'snippet',
+			'maxResults'  => self::$max_results,
+			'playlistId'  => sanitize_text_field( $response->items[0]->contentDetails->relatedPlaylists->uploads )
+		);
+		$response = self::get_data( 'playlistItems', $args );
+
+		return self::normalize( $response );
 	}
 
 	public static function playlist( $playlist ) {
-		$playlist = sanitize_text_field( $playlist );
-		$url      = 'https://gdata.youtube.com/feeds/api/playlists/' . $playlist . '?';
+		$args = array(
+			'part'        => 'snippet',
+			'maxResults'  => self::$max_results,
+			'playlistId'  => sanitize_text_field( $playlist )
+		);
+		$response = self::get_data( 'playlistItems', $args );
 
-		return self::get_data( $url );
+		return self::normalize( $response );
 	}
 
 	public static function search( $search ) {
-		$search = sanitize_text_field( $search );
-		$url    = 'https://gdata.youtube.com/feeds/api/videos?q=' . $search . '&';
+		$args = array(
+			'part'        => 'snippet',
+			'maxResults'  => self::$max_results,
+			'q'           => sanitize_text_field( $search )
+		);
+		$response = self::get_data( 'search', $args );
 
-		return self::get_data( $url );
+		return self::normalize( $response );
 	}
 
 
 
-	private static function get_data( $url ) {
-		$url .= 'max-results=' . self::$max_results . '&start-index=' . self::$start_index;
-		$url .= '&format=1,5,6'; //format=5 = embed only and format=1,6 is mobile only
-		$url .= '&v=2&alt=jsonc';
+	private static function get_data( $method, $args = array() ) {
+		$url = self::url . $method;
 
-		if ( ! self::being_cached() ) {
-			$url .= '&restriction=' . self::get_ip_address();
-		}
+		$args['key'] = self::$key;
+		$url         = add_query_arg( $args, $url );
 
 		$response = wp_remote_get( esc_url_raw( $url ) );
 		$data     = json_decode( wp_remote_retrieve_body( $response ) );
 
-		return self::normalize( $data );
+		return $data;
 	}
 
 	private static function normalize( $data ) {
-		$response = array( 'total' => 0, 'max_results' => $max_results, 'start_index' => $start_index, 'songs' => array() );
+		$response = array( 'total' => 0, 'max_results' => 0, 'start_index' => 0, 'songs' => array() );
 
-		if( ! empty( $data ) && ! isset( $data->error ) ) {
-			$response['total']       = $data->data->totalItems;
-			$response['start_index'] = $data->data->startIndex;
-			$items                   = $data->data->items;
+		if ( ! empty( $data ) && ! isset( $data->error ) ) {
+			$response['total']       = $data->pageInfo->totalResults;
+			$items                   = $data->items;
 
-			foreach( $items as $item ) {
-				if ( ! isset( $item->title ) && isset( $item->video, $item->video->title ) ) {
-					$item = $item->video;
+			foreach ( $items as $item ) {
+				if ( isset( $item->id->videoId ) ) {
+					$id = $item->id->videoId;
+				}
+				elseif ( isset( $item->snippet->resourceId ) ) {
+					$id = $item->snippet->resourceId->videoId;
+				}
+				else {
+					$id = $item->id;
 				}
 
 				array_push( $response['songs'], array(
-					'id'        => $item->id,
-					'title'     => $item->title,
-					'thumbnail' => array( 'normal' => $item->thumbnail->sqDefault, 'high' => $item->thumbnail->hqDefault ),
-					'duration'  => $item->duration,
-					'mobile'    => isset( $item->player->mobile )
+					'id'        => $id,
+					'title'     => $item->snippet->title,
+					'thumbnail' => array(
+						'normal' => $item->snippet->thumbnails->default->url,
+						'high'   => $item->snippet->thumbnails->high->url,
+					)
 				) );
 			}
 		}
 
 		return $response;
-	}
-
-
-	private static function get_ip_address() {
-		$remote_ip = isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : null;
-
-		$remote_ip = preg_replace( '/[^0-9a-fA-F:., ]/', '', $remote_ip );
-
-		return $remote_ip;
-	}
-
-	private static function being_cached() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return false;
-		}
-
-		if ( ! defined( 'WP_CACHE' ) || ! WP_CACHE ) {
-			return false;
-		}
-
-		if ( is_user_logged_in() ) {
-			return false;
-		}
-
-		return true;
 	}
 
 }
