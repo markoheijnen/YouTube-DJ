@@ -3,7 +3,7 @@
 class Youtubedj_API {
 	const url = 'https://www.googleapis.com/youtube/v3/';
 
-	private static $key = 'some-key';
+	public static $key = false;
 
 	private static $max_results = 25;
 	private static $start_index = 1;
